@@ -13,9 +13,9 @@ after_sucess:
  - docker build -t thakurrohan037/multi-nginx ./nginx
  - docker build -t thakurrohan037/multi-server ./server
  - docker build -t thakurrohan037/multi-worker ./worker
-
+ #login into the travis ci
  - echo "$Docker_PASS" | docker login -u "$Docker_ID"  --password-stdin
-
+ #deploy to docker hub
  - docker push thakurrohan037/multi-client
  - docker push thakurrohan037/multi-nginx
  - docker push thakurrohan037/multi-server
