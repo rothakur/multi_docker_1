@@ -3,20 +3,20 @@ services:
  - docker
 
 before_install:
- - docker build -t thakurrohan037/react-test -f ./client/Dockerfile.dev ./client
+ - docker build -t thakurrohan/react-test -f ./client/Dockerfile.dev ./client
 
 script:
- - docker run -e CI=true thakurrohan037/react-test npm test 
+ - docker run -e CI=true thakurrohan/react-test npm test 
 
 after_sucess:
- - docker build -t thakurrohan037/multi-client ./client
- - docker build -t thakurrohan037/multi-nginx ./nginx
- - docker build -t thakurrohan037/multi-server ./server
- - docker build -t thakurrohan037/multi-worker ./worker
+ - docker build -t thakurrohan/multi-client ./client
+ - docker build -t thakurrohan/multi-nginx ./nginx
+ - docker build -t thakurrohan/multi-server ./server
+ - docker build -t thakurrohan/multi-worker ./worker
  #login into the travis ci
  - echo "$Docker_PASS" | docker login -u "$Docker_ID"  --password-stdin
  #deploy to docker hub
- - docker push thakurrohan037/multi-client
- - docker push thakurrohan037/multi-nginx
- - docker push thakurrohan037/multi-server
- - docker push thakurrohan037/multi-worker
+ - docker push thakurrohan/multi-client
+ - docker push thakurrohan/multi-nginx
+ - docker push thakurrohan/multi-server
+ - docker push thakurrohan/multi-worker
