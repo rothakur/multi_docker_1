@@ -15,8 +15,21 @@ after_sucess:
  - docker build -t thakurrohan/multi-worker ./worker
  #login into the travis ci using encyrpted username and password
  - echo "$Docker_PASS" | docker login -u "$Docker_ID"  --password-stdin
- #deploy to docker hub
+ #deploy to docker hub using the same name as your docker id
  - docker push thakurrohan/multi-client
  - docker push thakurrohan/multi-nginx
  - docker push thakurrohan/multi-server
  - docker push thakurrohan/multi-worker
+deploy:
+ edge: true
+ provider: elasticbeanstalk
+ region: us-east-2
+ app: multi-docker
+ env: MultiDocker-env
+ bucket_name: elasticbeanstalk-us-east-2-904095803115
+ bucket_path: docker_multi
+ on: 
+  branch: master
+ access_key_id: $AWS_ACCESS_KEY
+ secret_access_key: $AWS_SECRET_KEY
+
